@@ -24,10 +24,18 @@ done
 
 # update the packages up to date
 sudo apt update
-# install default jdk
-sudo apt install default-jdk -y
+# install default jdk, pssh
+sudo apt install default-jdk pssh -y
 # set JAVA_HOME in ~/.bashrc
-echo "export JAVA_HOME=$(readlink -f  $(which java) | sed "s:/bin/java::")" >> ~/.bashrc
+# Setup password-less ssh between nodes
+for user in $USERS; do
+    if [ "$user" = "root" ]; then
+        bashrc_file=/root/.bashrc
+    else
+        bashrc_file=/users/$user/.bashrc
+    fi
+    echo "export JAVA_HOME=$(readlink -f  $(which java) | sed "s:/bin/java::")" >> $bashrc_file
+done    
 
 ## change permission to 
 if [ -d "/mydata" ]; then
