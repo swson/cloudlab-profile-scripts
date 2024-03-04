@@ -27,7 +27,6 @@ sudo apt update
 # install default jdk, pssh
 sudo apt install default-jdk pssh -y
 # set JAVA_HOME in ~/.bashrc
-# Setup password-less ssh between nodes
 for user in $USERS; do
     if [ "$user" = "root" ]; then
         bashrc_file=/root/.bashrc
