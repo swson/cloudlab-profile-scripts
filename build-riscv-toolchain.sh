@@ -4,6 +4,8 @@
 #    https://github.com/riscv-collab/riscv-gnu-toolchain
 #    https://riscv.epcc.ed.ac.uk/documentation/how-to/install-toolchain/
 
+# after cloning the repo, run "source ./build-riscv-toolchain.sh" in order make the PATH env effective
+
 echo "updating system and installing prerequisites..."
 sudo apt update
 sudo apt install autoconf automake autotools-dev curl python3 libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib1g-dev libexpat-dev -y
@@ -19,6 +21,7 @@ mkdir build
 cd build
 ../configure --prefix=/opt/riscv --with-arch=rv32gc --with-abi=ilp32d
 sudo make -j$(nproc) linux
+## sudo make –j$(sysctl -n hw.logicalcpu) linux    <= since nproc is not available on macOS​
 
 echo "adding the RISC-V toolchain to PATH"
 export PATH=/opt/riscv/bin:$PATH
