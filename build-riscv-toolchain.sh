@@ -20,4 +20,5 @@ cd build
 ../configure --prefix=/opt/riscv --with-arch=rv32gc –with-abi=ilp32d​
 sudo make -j$(nproc) linux
 
-echo "add the RISC-V toolchain to PATH"
+echo "adding the RISC-V toolchain to PATH"
+export PATH=/opt/riscv/bin:$PATH
