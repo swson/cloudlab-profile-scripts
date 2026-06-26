@@ -7,6 +7,9 @@ all: $(TARGET).elf
 %.o: %.s
 	arm-none-eabi-as -mcpu=$(CPU) -mthumb -o $@ $<
 
+%.o: %.S
+	arm-none-eabi-gcc -x assembler-with-cpp -mcpu=$(CPU) -mthumb -c -o $@ $<
+
 $(TARGET).elf: $(OBJS) linker.ld
 	arm-none-eabi-gcc -nostdlib -nostartfiles -T linker.ld \
 	-mcpu=$(CPU) -mthumb -Wl,-Map=$(TARGET).map \
